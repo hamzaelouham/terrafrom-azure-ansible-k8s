@@ -1,0 +1,117 @@
+# =========================
+# Terraform
+# =========================
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+!*.tfvars.example
+crash.log
+crash.*.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+.terraformrc
+terraform.rc
+
+# =========================
+# Ansible
+# =========================
+# Inventory files (may contain IPs/credentials)
+ansible/inventory
+ansible/inventory.yml
+ansible/inventory.yaml
+# Keep hosts as example, ignore actual production inventory
+# ansible/hosts  # Uncomment if hosts contains sensitive data
+
+# Ansible vault files
+*.vault
+*.vault.yml
+*.vault.yaml
+*vault*.yml
+*vault*.yaml
+
+# Ansible retry files
+*.retry
+
+# Ansible logs
+ansible/*.log
+ansible/**/*.log
+
+# Ansible temporary files
+ansible/tmp/
+ansible/**/.ansible_tmp/
+
+# =========================
+# SSH Keys & Certificates
+# =========================
+*.pem
+*.key
+*.p12
+*.pfx
+id_rsa
+id_rsa.*
+id_ed25519
+id_ed25519.*
+*.crt
+!*.crt.example
+
+# =========================
+# Kubernetes
+# =========================
+kubeconfig
+kubeconfig.yaml
+kubeconfig.yml
+*.kubeconfig
+admin.conf
+/tmp/kubernetes_join_command
+
+# =========================
+# Cloud Provider Credentials
+# =========================
+# Azure
+.azure/
+azure.json
+**/azure-credentials.json
+
+# AWS
+.aws/
+credentials
+*.credentials
+
+# GCP
+*.json
+!package.json
+!*.example.json
+gcloud/
+
+# =========================
+# Environment & Secrets
+# =========================
+.env
+.env.*
+!.env.example
+*.secrets
+secrets/
+secrets.yml
+secrets.yaml
+
+# =========================
+# OS & Editor
+# =========================
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
+*.code-workspace
+
+# =========================
+# Logs & Debug
+# =========================
+*.log
+logs/
+debug/

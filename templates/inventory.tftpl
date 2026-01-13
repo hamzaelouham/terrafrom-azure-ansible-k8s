@@ -1,0 +1,14 @@
+[master]
+${master_ip} ansible_user=${ssh_user} ansible_password=${ssh_password} ansible_become_password=${ssh_password}
+
+[worker]
+%{ for ip in worker_ips ~}
+${ip} ansible_user=${ssh_user} ansible_password=${ssh_password} ansible_become_password=${ssh_password}
+%{ endfor ~}
+
+[all:children]
+master
+worker
+
+[all:vars]
+ansible_ssh_common_args='-o StrictHostKeyChecking=no'
