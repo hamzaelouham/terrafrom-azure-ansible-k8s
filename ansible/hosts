@@ -1,9 +1,0 @@
-[all]
-localhost ansible_connection=local
-
-[master]
-localhost ansible_connection=local
-
-[worker]
-# No workers for local testing - comment out or add remote hosts
-# worker1 ansible_host=192.168.1.101

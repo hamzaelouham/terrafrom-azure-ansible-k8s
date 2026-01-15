@@ -2,26 +2,26 @@
 variable "resource_group_name" {
   description = "Name of the resource group"
   type        = string
-  default     = "rg-k8s-cluster"
+  default     = "k8s-cluster"
 }
 
 variable "location" {
   description = "Azure region for resources"
   type        = string
-  default     = "westeurope"
+  default     = "East US 2"
 }
 
 # Network
 variable "vnet_address_space" {
   description = "Address space for the virtual network"
   type        = list(string)
-  default     = ["10.0.0.0/16"]
+  default     = ["10.1.0.0/16"]
 }
 
 variable "subnet_address_prefixes" {
   description = "Address prefixes for the subnet"
   type        = list(string)
-  default     = ["10.0.1.0/24"]
+  default     = ["10.1.1.0/24"]
 }
 
 # Master Node Configuration
@@ -112,4 +112,16 @@ variable "tags" {
     ManagedBy   = "Terraform"
     Project     = "Kubernetes"
   }
+}
+
+variable "peer_vnet_name" {
+  description = "Name of the existing VNet to peer with"
+  type        = string
+  default     = "devopsVM-vnet"
+}
+
+variable "peer_vnet_resource_group" {
+  description = "Resource Group of the existing VNet to peer with"
+  type        = string
+  default     = "devops-group"
 }

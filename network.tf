@@ -50,3 +50,23 @@ resource "azurerm_subnet_nat_gateway_association" "main" {
   subnet_id      = azurerm_subnet.main.id
   nat_gateway_id = azurerm_nat_gateway.main.id
 }
+
+# Peering with existing VNet
+data "azurerm_virtual_network" "peer" {
+  name                = var.peer_vnet_name
+  resource_group_name = var.peer_vnet_resource_group
+}
+
+resource "azurerm_virtual_network_peering" "peer_to_new" {
+  name                      = "peer-to-new"
+  resource_group_name       = var.peer_vnet_resource_group
+  virtual_network_name      = data.azurerm_virtual_network.peer.name
+  remote_virtual_network_id = azurerm_virtual_network.main.id
+}
+
+resource "azurerm_virtual_network_peering" "new_to_peer" {
+  name                      = "new-to-peer"
+  resource_group_name       = azurerm_resource_group.main.name
+  virtual_network_name      = azurerm_virtual_network.main.name
+  remote_virtual_network_id = data.azurerm_virtual_network.peer.id
+}
