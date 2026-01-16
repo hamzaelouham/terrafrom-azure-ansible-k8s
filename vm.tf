@@ -29,8 +29,17 @@ resource "azurerm_linux_virtual_machine" "master" {
     azurerm_network_interface.master.id
   ]
 
-  admin_password                  = var.admin_password
-  disable_password_authentication = false
+  disable_password_authentication = true
+
+  admin_ssh_key {
+    username   = var.admin_username
+    public_key = file(var.ssh_public_key_path)
+  }
+
+  custom_data = base64encode(templatefile("${path.module}/templates/cloud-init.yaml.tftpl", {
+    username       = var.admin_username
+    ssh_public_key = file(var.ssh_public_key_path)
+  }))
 
   os_disk {
     caching              = "ReadWrite"
@@ -83,8 +92,17 @@ resource "azurerm_linux_virtual_machine" "worker" {
     azurerm_network_interface.worker[count.index].id
   ]
 
-  admin_password                  = var.admin_password
-  disable_password_authentication = false
+  disable_password_authentication = true
+
+  admin_ssh_key {
+    username   = var.admin_username
+    public_key = file(var.ssh_public_key_path)
+  }
+
+  custom_data = base64encode(templatefile("${path.module}/templates/cloud-init.yaml.tftpl", {
+    username       = var.admin_username
+    ssh_public_key = file(var.ssh_public_key_path)
+  }))
 
   os_disk {
     caching              = "ReadWrite"

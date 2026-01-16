@@ -5,10 +5,10 @@
 # Generate Ansible inventory from Terraform outputs
 resource "local_file" "ansible_inventory" {
   content = templatefile("${path.module}/templates/inventory.tftpl", {
-    master_ip    = azurerm_network_interface.master.private_ip_address
-    worker_ips   = azurerm_network_interface.worker[*].private_ip_address
-    ssh_user     = var.admin_username
-    ssh_password = var.admin_password
+    master_ip            = azurerm_network_interface.master.private_ip_address
+    worker_ips           = azurerm_network_interface.worker[*].private_ip_address
+    ssh_user             = var.admin_username
+    ssh_private_key_path = var.ssh_private_key_path
   })
   filename        = "${path.module}/ansible/inventory"
   file_permission = "0600"
